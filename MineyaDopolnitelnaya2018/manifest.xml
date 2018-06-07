@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This is a Manifest file for the eTHEKE library -->
+<bookdata>
+	<head>
+		<meta name="uuid" content="c7b61ace-4ff6-45d0-8310-6c20b3c476ba"/>
+		<meta name="lang" content="cu"/>
+		<meta name="title" content="Минея Дополнительная"/>
+		<meta name="latin" content="MineyaDopolnitelnaya"/>
+		<meta name="publisher" content="Издательство Московской патриархии"/>
+		<meta name="year" content="2018"/>
+		<meta name="note" content="Тексты приводятся по изданию: МИНЕ́Ѧ дополни́тельнаѧ. ча́сть а҃ септе́мврїй _ феврꙋа́рїй. Москва, 2018. Набор: Ponomar Technologies, Inc."/>
+	</head>
+	<manifest>
+		<chapter file="02.xml" name="2 сентября: Всех святых, в земле липецкой просиявших"/>
+	</manifest>
+</bookdata>
