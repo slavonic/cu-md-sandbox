@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This is a Manifest file for the eTHEKE library -->
+<bookdata>
+	<head>
+		<meta name="uuid" content="46183ea8-c3dd-46fb-bc6d-93d4119675f7"/>
+		<meta name="lang" content="cu"/>
+		<meta name="title" content="Постная Триодь"/>
+		<meta name="latin" content="PostnayaTriod"/>
+		<meta name="publisher" content="Синодальная типография"/>
+		<meta name="year" content="1915"/>
+		<meta name="note" content="Тексты приводятся по изданию: ТРІѠ́ДІОНЪ сі́есть трипѣ́снецъ. Репри́нтное воспроизведе́нїе и҆зда́нїѧ 1915 го́да"/>
+	</head>
+	<manifest>
+		<chapter file="01mytar.xml" name="Неделя о мытаре и фарисее"/>
+		<chapter file="02blud.xml" name="Неделя о блудном сыне"/>
+		<chapter file="03submyas.xml" name="Суббота мясопустная"/>
+		<chapter file="04nedmyas.xml" name="Неделя мясопустная"/>
+		<chapter file="05sedmsyrn.xml" name="Сырная седмица (с понедельника по пяток)"/>
+		<chapter file="06subsyrn.xml" name="Суббота сыропустная"/>
+		<chapter file="07nedsyrn.xml" name="Неделя сыропустная"/>
+		<chapter file="08pnd1.xml" name="Понедельник первой седмицы"/>
+		<chapter file="09vt1.xml" name="Вторник первой седмицы"/>
+ 		<chapter file="10srd1.xml" name="Среда первой седмицы"/>
+  		<chapter file="11cht1.xml" name="Четверг первой седмицы"/>
+   		<chapter file="12pt1.xml" name="Пяток первой седмицы"/>
+   		<chapter file="13sub1.xml" name="Суббота первой седмицы"/>
+   		<chapter file="14nd1.xml" name="Неделя Торжества Православия"/>
+   		<chapter file="15sdm2.xml" name="Вторая седмица (с понедельника по пяток)"/>
+  		<chapter file="16sub2.xml" name="Суббота второй седмицы"/>
+   		<chapter file="17ned2.xml" name="Неделя второй седмицы, Григория Паламы"/>
+	</manifest>
+</bookdata>
