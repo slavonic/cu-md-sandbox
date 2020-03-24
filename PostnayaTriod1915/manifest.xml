@@ -28,5 +28,23 @@
    		<chapter file="15sdm2.xml" name="Вторая седмица (с понедельника по пяток)"/>
   		<chapter file="16sub2.xml" name="Суббота второй седмицы"/>
    		<chapter file="17ned2.xml" name="Неделя второй седмицы, Григория Паламы"/>
+   		<chapter file="18sedm3.xml" name="Третья седмица (с понедельника по пяток)"/>
+   		<chapter file="19sub3.xml" name="Суббота третьей седмицы"/>
+   		<chapter file="20cross.xml" name="Неделя Крестопоклонная"/>
+    	<chapter file="21sedm4.xml" name="Четвертая седмица (с понедельника по пяток)"/>
+    	<chapter file="22sub4.xml" name="Суббота четвертой седмицы"/>
+    	<chapter file="23ned4.xml" name="Неделя четвертой седмицы, Иоанна Лествичника"/>
+    	<chapter file="24sed5.xml" name="Пятая седмица (с понедельника по пяток)"/>
+   		<chapter file="26akath.xml" name="Суббота Акафиста"/>
+    	<chapter file="27ned5.xml" name="Неделя пятой седмицы, Марии Египетской"/>
+     	<chapter file="28sedmv.xml" name="Седмица ваий (с понедельника по пяток)"/>
+    	<chapter file="29lazar.xml" name="Лазарева Суббота"/>
+   		<chapter file="30palm.xml" name="Неделя ваий (Вербное Воскресенье)"/>
+  		<chapter file="31grmon.xml" name="Великий Понедельник"/>
+ 		<chapter file="32grtue.xml" name="Великий Вторник"/>
+		<chapter file="33grwed.xml" name="Великая Среда"/>
+		<chapter file="34grthu.xml" name="Великий Четверг"/>
+		<chapter file="35grfr.xml" name="Великий Пяток"/>
+		<chapter file="36grsat.xml" name="Великая Суббота"/>
 	</manifest>
 </bookdata>
