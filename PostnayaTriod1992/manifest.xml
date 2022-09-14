@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bookdata>
+	<head>
+		<meta name="uuid" content="8fcb82a0-cf75-11e0-b5ed-986bd7a8165a"/>
+		<meta name="lang" content="cu"/>
+		<meta name="title" content="Постная Триодь"/>
+		<meta name="latin" content="PostnayaTriod"/>
+		<meta name="publisher" content="Издание Московской Патриархии, Москва"/>
+		<meta name="year" content="1992"/>
+		<meta name="note" content="Тексты приводятся по изданию: Трїѡ́дь по́стнаѧ. В 2 частях. OCR: http://www.orthlib.ru/; Conversion from HIP to Unicode: Ponomar Technologies, Inc."/>
+	</head>
+	<manifest>
+		<chapter file="01mytar" name="Неделя о мытаре и фарисее"/>
+		<chapter file="02blud" name="Неделя о блудном сыне"/>
+		<chapter file="03submyas" name="Суббота мясопустная"/>
+		<chapter file="04nedmyas" name="Неделя мясопустная"/>
+		<chapter file="05sedmsyrn" name="Сырная седмица (с понедельника по пяток)"/>
+		<chapter file="06subsyrn" name="Суббота сыропустная"/>
+		<chapter file="07nedsyrn" name="Неделя сыропустная"/>
+		<chapter file="08pnd1" name="Понедельник первой седмицы"/>
+		<chapter file="09vt1" name="Вторник первой седмицы"/>
+ 		<chapter file="10srd1" name="Среда первой седмицы"/>
+  		<chapter file="11cht1" name="Четверг первой седмицы"/>
+   		<chapter file="12pt1" name="Пяток первой седмицы"/>
+    		<chapter file="13sub1" name="Суббота первой седмицы"/>
+   		<chapter file="14nd1" name="Неделя Торжества Православия"/>
+   		<chapter file="15sdm2" name="Вторая седмица (с понедельника по пяток)"/>
+  		<chapter file="16sub2" name="Суббота второй седмицы"/>
+   		<chapter file="17ned2" name="Неделя второй седмицы, Григория Паламы"/>
+   		<chapter file="18sedm3" name="Третья седмица (с понедельника по пяток)"/>
+   		<chapter file="19sub3" name="Суббота третьей седмицы"/>
+   		<chapter file="20cross" name="Неделя Крестопоклонная"/>
+    		<chapter file="21sedm4" name="Четвертая седмица (с понедельника по пяток)"/>
+    		<chapter file="22sub4" name="Суббота четвертой седмицы"/>
+    		<chapter file="23ned4" name="Неделя четвертой седмицы, Иоанна Лествичника"/>
+    		<chapter file="24sed5" name="Пятая седмица (с понедельника по пяток)"/>
+   		<chapter file="25mar" name="Мариино стояние с приложением службы среды с алфавитными  стихирами"/>
+    		<chapter file="26akath" name="Суббота Акафиста"/>
+    		<chapter file="27ned5" name="Неделя пятой седмицы, Марии Египетской"/>
+     		<chapter file="28sedmv" name="Седмица ваий (с понедельника по пяток)"/>
+    		<chapter file="29lazar" name="Лазарева Суббота"/>
+   		<chapter file="30palm" name="Неделя ваий (Вербное Воскресенье)"/>
+  		<chapter file="31grmon" name="Великий Понедельник"/>
+ 		<chapter file="32grtue" name="Великий Вторник"/>
+		<chapter file="33grwed" name="Великая Среда"/>
+		<chapter file="34grthu" name="Великий Четверг"/>
+		<chapter file="35grfr" name="Великий Пяток"/>
+		<chapter file="36grsat" name="Великая Суббота"/>
+	</manifest>
+</bookdata>

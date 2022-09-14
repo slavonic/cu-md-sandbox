@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bookdata>
+	<head>
+		<meta name="uuid" content="79a74ae2-cec9-11e0-bc18-c69954a6a287"/>
+		<meta name="lang" content="cu"/>
+		<meta name="title" content="Часослов"/>
+		<meta name="latin" content="Chasoslov"/>
+		<meta name="publisher" content="Московская Патриархия, Москва"/>
+		<meta name="year" content="1991"/>
+		<meta name="note" content="OCR: http://www.orthlib.ru/; Conversion from HIP to Unicode: Ponomar Technologies, Inc."/>
+	</head>
+	<manifest>
+		<chapter file="01polunosch" name="Полунощница"/>
+		<chapter file="02utren" name="Последование утрени"/>
+		<chapter file="03chas1" name="Час первый"/>
+		<chapter file="04chas3" name="Час третий"/>
+		<chapter file="05chas6" name="Час шестой"/>
+		<chapter file="06izobrazit" name="Последование изобразительных"/>
+		<chapter file="07panag" name="Чин о панагии"/>
+		<chapter file="08chas9" name="Час девятый"/>
+		<chapter file="09vechern" name="Последование вечерни"/>
+		<chapter file="10trapez" name="Молитвы в трапезе"/>
+		<chapter file="11vpovech" name="Великое повечерие"/>
+		<chapter file="12mpovech" name="Малое повечерие"/>
+		<chapter file="13kafisma17" name="Кафисма 17"/>
+		<chapter file="14otpvoskr" name="Отпустительные воскресные, восьми гласов, с Богородичными и ипакои их"/>
+		<chapter file="15otpbogor" name="Богородичны отпустительные, поемые в течение всего года"/>
+		<chapter file="16otpsedm" name="Отпустительные тропари седмичные"/>
+		<chapter file="17moleben" name="Последование общего молебна"/>
+		<chapter file="18tropnepor" name="Тропари воскресные, поемые по Непорочнах"/>
+		<chapter file="19subbtropnep" name="Тропари, поемые по Непорочнах в субботу"/>
+	</manifest>
+</bookdata>

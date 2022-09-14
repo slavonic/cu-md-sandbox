@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bookdata>
+	<head>
+		<meta name="uuid" content="a29c0203-4f66-4057-8d2c-dfb72317d03a"/>
+		<meta name="lang" content="cu"/>
+		<meta name="title" content="Следованная Псалтирь, том 2"/>
+		<meta name="latin" content="AugmentedPsalter2"/>
+		<meta name="publisher" content="Издание Донского монастыря"/>
+		<meta name="year" content="1993"/>
+		<meta name="note" content="Тексты приводятся по изданию: Псалтирь слѣдованная, II часть, Донской монастырь, Москва, ҂ацч҃г. Набор: Ponomar Technologies, Inc."/>
+	</head>
+	<manifest>
+		<chapter file="08chas1inter" name="Междочасие Первого часа"/>
+		<chapter file="10chas3inter" name="Междочасие Третьего часа"/>
+		<chapter file="12chas6inter" name="Междочасие Шестого часа"/>
+		<chapter file="16chas9inter" name="Междочасие Девятого часа"/>
+	</manifest>
+</bookdata>

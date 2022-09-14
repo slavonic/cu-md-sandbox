@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bookdata>
+	<head>
+		<meta name="uuid" content="3dcfce28-c459-11e1-bb57-bb85a0ec8ae7"/>
+		<meta name="lang" content="cu"/>
+		<meta name="title" content="Следованная Псалтирь"/>
+		<meta name="latin" content="AugmentedPsalter"/>
+		<meta name="publisher" content="Издание Московской Патриархии"/>
+		<meta name="year" content="1978"/>
+		<meta name="note" content="Тексты приводятся по изданию: Псалтирь слѣдованная, I часть, Московская патріархіѧ, Москва, ҂ацо҃и. OCR: http://www.orthlib.ru/; Conversion from HIP to Unicode: Ponomar Technologies, Inc."/>
+	</head>
+	<manifest>
+		<chapter file="Cathisma_1" name="Кафизма 1"/>
+		<chapter file="Cathisma_2" name="Кафизма 2"/>
+		<chapter file="Cathisma_3" name="Кафизма 3"/>
+		<chapter file="Cathisma_4" name="Кафизма 4"/>
+		<chapter file="Cathisma_5" name="Кафизма 5"/>
+		<chapter file="Cathisma_6" name="Кафизма 6"/>
+		<chapter file="Cathisma_7" name="Кафизма 7"/>
+		<chapter file="Cathisma_8" name="Кафизма 8"/>
+		<chapter file="Cathisma_9" name="Кафизма 9"/>
+		<chapter file="Cathisma_10" name="Кафизма 10"/>
+		<chapter file="Cathisma_11" name="Кафизма 11"/>
+		<chapter file="Cathisma_12" name="Кафизма 12"/>
+		<chapter file="Cathisma_13" name="Кафизма 13"/>
+		<chapter file="Cathisma_14" name="Кафизма 14"/>
+		<chapter file="Cathisma_15" name="Кафизма 15"/>
+		<chapter file="Cathisma_16" name="Кафизма 16"/>
+		<chapter file="Cathisma_17" name="Кафизма 17"/>
+		<chapter file="Cathisma_18" name="Кафизма 18"/>
+		<chapter file="Cathisma_19" name="Кафизма 19"/>
+		<chapter file="Cathisma_20" name="Кафизма 20"/>
+		<chapter file="Ustav" name="Устав пения Псалтири"/>
+		<chapter file="02ishod" name="Последование по исходе души от тела"/>
+		<chapter file="03slad" name="Служба с акафистом Иисусу Сладчайшему"/>
+		<chapter file="04ob" name="Служба общая во вся дни Господу"/>
+		<chapter file="05akaf_bogor" name="Служба с акафистом Богородице"/>
+		<chapter file="06k_bogor" name="Канон молебный Богородице"/>
+		<chapter file="07k_ang1" name="Канон молебный Ангелу Хранителю"/>
+		<chapter file="08k_ang2" name="Канон молебный Ангелу Хранителю (иный)"/>
+		<chapter file="09k_arhang" name="Служба в понедельник - Бесплотным"/>
+		<chapter file="10k_prdt" name="Служба во вторник - Предтече"/>
+		<chapter file="11k_odig" name="Служба в среду Богородице Одигитрии"/>
+		<chapter file="12k_nicap" name="Служба в четверток - Апостолам и Святителю Николаю"/>
+		<chapter file="13k_krest" name="Служба в пяток - Кресту"/>
+		<chapter file="14k_cv" name="Служба в субботу - всем святым"/>
+		<chapter file="15m_utr" name="Молитвы утренние"/>
+		<chapter file="16m_vech" name="Молитвы на сон грядущим"/>
+		<chapter file="17ko_prich" name="Последование ко Святому Причащению"/>
+		<chapter file="18po_prich" name="Молитвы по Святом Причащении"/>
+	</manifest>
+</bookdata>
