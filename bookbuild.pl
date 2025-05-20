@@ -48,7 +48,7 @@ sub endElement {
 }
 ####### END OF PARSING SUBS #####################
 
-my $outputdir = "/home/sasha/design/ponomar/maktabah";
+my $outputdir = "/home/sasha/Documents/design/ponomar/maktabah";
 my $parser = new XML::Parser(ErrorContext => 2);
 $parser->setHandlers(	Start   => \&startElement,
 			End     => \&endElement,
