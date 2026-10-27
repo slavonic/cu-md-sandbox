@@ -1,0 +1,64 @@
+# Builds the library website on every push and (optionally) deploys it.
+# To activate: move this file to .github/workflows/build-site.yml
+#
+# Deployment by rsync over SSH runs only when these repository secrets exist:
+#   DEPLOY_HOST     e.g. www.ponomar.net
+#   DEPLOY_USER     SSH user on that host
+#   DEPLOY_PATH     e.g. /var/www/ponomar/maktabah
+#   DEPLOY_SSH_KEY  private key (ed25519) whose public half is in the user's authorized_keys
+# The pdf/ folder on the server is never touched: upload the scans there once
+# with scripts/prepare_pdf.py (they are too large for git).
+# Optional repository variable SITE_URL (default https://www.ponomar.net/maktabah/) for sitemap.xml.
+
+name: Build library website
+
+on:
+  push:
+    branches: [master]
+    paths-ignore: ["**/README.md"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install
+        run: pip install -r scripts/requirements.txt pytest
+
+      - name: Test the converter
+        run: python -m pytest -q scripts/tests
+
+      - name: Build
+        run: >
+          python scripts/build_library.py --out _site --fetch-pdfjs
+          --base-url "${{ vars.SITE_URL || 'https://www.ponomar.net/maktabah/' }}"
+
+      - name: Keep the built site as a downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: maktabah-site
+          path: _site
+          retention-days: 7
+
+      - name: Deploy
+        if: env.DEPLOY_HOST != ''
+        env:
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          rsync -az --delete --exclude 'pdf/' _site/ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/"

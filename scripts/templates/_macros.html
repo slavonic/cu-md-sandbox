@@ -1,0 +1,37 @@
+{% macro icon(name) -%}
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+{%- if name == 'menu' %}<path d="M4 6h16M4 12h16M4 18h10"/>
+{%- elif name == 'close' %}<path d="M6 6l12 12M18 6L6 18"/>
+{%- elif name == 'type' %}<path d="M4 19l5-14h1l5 14M6 14h7M16 19l2.5-7h.5l2.5 7M17 16.5h4"/>
+{%- elif name == 'copy' %}<rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/>
+{%- elif name == 'print' %}<path d="M7 9V4h10v5M7 17H5a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2"/><rect x="7" y="14" width="10" height="6"/>
+{%- elif name == 'prev' %}<path d="M15 5l-7 7 7 7"/>
+{%- elif name == 'next' %}<path d="M9 5l7 7-7 7"/>
+{%- elif name == 'scan' %}<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>
+{%- elif name == 'book' %}<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zM5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/>
+{%- elif name == 'expand' %}<path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/>
+{%- elif name == 'download' %}<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>
+{%- elif name == 'search' %}<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>
+{%- endif -%}
+</svg>
+{%- endmacro %}
+
+{% macro lang_switch() -%}
+<div class="lang-switch" role="group" data-i18n-aria="language">
+  <button type="button" data-set-lang="en" lang="en">EN</button><button type="button" data-set-lang="ru" lang="ru">RU</button>
+</div>
+{%- endmacro %}
+
+{% macro cover(book, root, small=True) -%}
+{% set src = book.cover_small if small else book.cover %}
+{% if src %}
+<img class="cover-img" src="{{ root }}{{ book.id }}/{{ src }}" alt="" loading="lazy" decoding="async">
+{% else %}
+<span class="cover-blank" aria-hidden="true"><span class="cu">{{ book.title_ru }}</span><span class="cover-year">{{ book.year }}</span></span>
+{% endif %}
+{%- endmacro %}
+
+{# link to the first page of a scan volume (i = page index in the PDF itself) #}
+{% macro scan_href(root, book, vol_index=0) -%}
+{{ root }}scan.html?b={{ book.id }}{% if vol_index %}&amp;v={{ vol_index }}{% endif %}&amp;i=1
+{%- endmacro %}

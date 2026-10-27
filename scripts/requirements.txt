@@ -1,0 +1,5 @@
+# Python 3.9+ (3.11+ recommended; older versions also need: tomli)
+cumd>=1.5
+markdown>=3.7
+jinja2>=3.1
+Pillow>=10      # optional: makes small JPEG covers for the front page
