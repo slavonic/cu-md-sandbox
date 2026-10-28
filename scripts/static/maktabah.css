@@ -2,11 +2,6 @@
    Colours: the kinovar of the rubrics, the dark green of the Moscow Patriarchate
    bindings, a little gilt; everything else stays out of the text's way. */
 
-/* Interface typeface: Fira Sans (SIL OFL), self-hosted, Latin + Cyrillic subsets */
-@font-face { font-family: "Fira Sans"; font-weight: 400; font-display: swap; src: url(fonts/fira-sans-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: "Fira Sans"; font-weight: 400; font-display: swap; src: url(fonts/fira-sans-cyrillic-400-normal.woff2) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
-@font-face { font-family: "Fira Sans"; font-weight: 600 700; font-display: swap; src: url(fonts/fira-sans-latin-600-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: "Fira Sans"; font-weight: 600 700; font-display: swap; src: url(fonts/fira-sans-cyrillic-600-normal.woff2) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
 
 :root {
   --kinovar: #cc0803;
@@ -21,7 +16,7 @@
   --on-binding: #f2efe6;
   --gilt: #a98236;
   --focus: #2e6be6;
-  --ui: "Fira Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ui: Arial, Verdana, Helvetica, sans-serif;
   --cu-face: "Triodion";
   --cu-size: 22px;
   --cu-lead: 1.55;
@@ -233,7 +228,7 @@ figure.verse figcaption { font-family: var(--ui); clear: both; margin-top: .5rem
 .book-meta dl { margin: 1.25rem 0 0; display: grid; grid-template-columns: auto 1fr; gap: .35rem 1rem; font-size: .92rem; max-width: 44rem; }
 .book-meta dt { color: var(--ink-3); }
 .book-meta dd { margin: 0; overflow-wrap: anywhere; }
-.note-text { font-family: var(--cu-face), "Ponomar", serif; font-size: 1.05rem; line-height: 1.4; }
+.note-text { font-size: .92rem; line-height: 1.45; }
 .book-meta .book-actions { margin-top: 1.5rem; }
 .book-meta .btn { min-height: 40px; }
 @media (min-width: 700px) { .book-head { grid-template-columns: 220px 1fr; } .book-cover { width: 220px; } }
@@ -268,7 +263,7 @@ figure.verse figcaption { font-family: var(--ui); clear: both; margin-top: .5rem
 .text { max-width: var(--measure); margin: 0 auto; font-size: var(--cu-size); line-height: var(--cu-lead); }
 .chapter-head { text-align: center; padding: 2.2rem 0 1.4rem; font-family: var(--ui); }
 .chapter-book { margin: 0 0 .3rem; font-size: .82rem; color: var(--ink-3); letter-spacing: .02em; font-family: var(--ui); }
-.chapter-title { margin: 0; font-family: var(--cu-face), "Ponomar", serif; font-weight: 400; color: var(--kinovar); font-size: 1.45em; line-height: 1.2; text-wrap: balance; }
+.chapter-title { margin: 0; font-family: var(--ui); font-weight: 600; color: var(--kinovar); font-size: 1.1em; line-height: 1.25; text-wrap: balance; }
 .chapter-title::after { content: ""; display: block; width: 3rem; margin: 1rem auto 0; border-bottom: 1px solid var(--rule); }
 
 .body p { margin: 0 0 .62em; position: relative; hyphens: manual; overflow-wrap: break-word; }

@@ -124,7 +124,14 @@
   function copySection() {
     var src = $(".text .body"); if (!src) return;
     var title = $(".chapter-title");
-    var clone = src.cloneNode(true);
+    var clone = null, sel = getSelection();
+    if (sel && !sel.isCollapsed && sel.rangeCount) {   // copy only what the reader selected
+      var rng = sel.getRangeAt(0);
+      if (src.contains(rng.commonAncestorContainer) || rng.commonAncestorContainer === src) {
+        clone = D.createElement("div"); clone.appendChild(rng.cloneContents()); title = null;
+      }
+    }
+    if (!clone) clone = src.cloneNode(true);
     $$(".pg, .footnote-backref", clone).forEach(function (n) { n.remove(); });
     var face = getComputedStyle(src).fontFamily, red = getComputedStyle(html).getPropertyValue("--kinovar").trim() || "#cc0803";
     $$(".red, .verse", clone).forEach(function (n) { n.style.color = red; });
@@ -134,9 +141,11 @@
     $$("a", clone).forEach(function (a) { var s = D.createElement("span"); s.innerHTML = a.innerHTML; s.style.cssText = a.style.cssText; a.replaceWith(s); });
     var head = title ? '<p style="text-align:center;color:' + red + '">' + esc(title.textContent) + "</p>" : "";
     var htmlText = '<div style="font-family:' + face.replace(/"/g, "'") + ';font-size:14pt">' + head + clone.innerHTML + "</div>";
-    var plain = (title ? title.textContent + "\n\n" : "") + $$("p, h1, h2, h3, h4, li", clone).map(function (p) {
+    var blocks = $$("p, h1, h2, h3, h4, li", clone).map(function (p) {
       return p.textContent.replace(/\s+/g, " ").trim();
-    }).filter(Boolean).join("\n\n");
+    }).filter(Boolean);
+    if (!blocks.length) blocks = [clone.textContent.replace(/\s+/g, " ").trim()];   // selection inside one line
+    var plain = (title ? title.textContent + "\n\n" : "") + blocks.join("\n\n");
     function fallback() {
       var ok = false, box = D.createElement("div");
       box.contentEditable = "true"; box.innerHTML = htmlText; box.style.cssText = "position:fixed;left:-9999px;top:0";
