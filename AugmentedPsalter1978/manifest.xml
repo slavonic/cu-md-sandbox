@@ -10,6 +10,7 @@
 		<meta name="note" content="Тексты приводятся по изданию: Псалтирь слѣдованная, I часть, Московская патріархіѧ, Москва, ҂ацо҃и. OCR: http://www.orthlib.ru/; Conversion from HIP to Unicode: Ponomar Technologies, Inc."/>
 	</head>
 	<manifest>
+		<chapter file="01ps" name="Предисловие"/>
 		<chapter file="Cathisma_1" name="Кафизма 1"/>
 		<chapter file="Cathisma_2" name="Кафизма 2"/>
 		<chapter file="Cathisma_3" name="Кафизма 3"/>

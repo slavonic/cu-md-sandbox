@@ -1,0 +1,322 @@
+# Catalog of the Ponomar Library of Liturgical Texts.
+#
+# Everything that is NOT in the books' own manifest.xml lives here: the English
+# titles, the grouping on the front page, and the PDF scans.  A book folder that
+# is not listed here is still built — it appears under "Other books" with the
+# data from its manifest — so adding a book to the repository never breaks the site.
+#
+# ── PDF scans ────────────────────────────────────────────────────────────────
+# Each [[books.X.pdf]] entry is one PDF volume, served from the site's pdf/ folder
+# (see --pdf-url in build_library.py).
+#
+#   file          file name inside pdf/
+#   offset        PDF page index = page number in the <<…>> tag + offset.
+#                 Use it to skip front matter: if page 1 of the book is the 5th page
+#                 of the PDF, offset = 4.  May be negative for a second volume.
+#   from_chapter  (multi-volume books) first chapter, by manifest file name, whose
+#                 page links go to this volume; earlier chapters use the earlier volume.
+#   source        where prepare_pdf.py downloads the original scan from (DJVU or PDF).
+#
+# The offsets below are 0 until someone checks them against the actual scans:
+# open any chapter, click a page number and see whether the scan agrees.
+
+[site]
+title_en = "Ponomar Library of Liturgical Texts"
+title_ru = "Библиотека богослужебных текстов «Пономарь»"
+repository = "https://github.com/slavonic/cu-md-sandbox"
+report_issue = "https://github.com/slavonic/cu-md-sandbox/issues/new"
+sci = "https://sci.ponomar.net/"
+fonts_help = "https://sci.ponomar.net/fonts.html"
+
+# Front-page sections, in display order.
+[[categories]]
+id = "scripture"
+en = "Scripture"
+ru = "Священное Писание"
+
+[[categories]]
+id = "hours"
+en = "Psalter and Horologion"
+ru = "Псалтирь и Часослов"
+
+[[categories]]
+id = "cycle"
+en = "Octoechos, Triodia and Heirmologion"
+ru = "Октоих, Триоди и Ирмологий"
+
+[[categories]]
+id = "menaion"
+en = "Menaion"
+ru = "Минеи"
+compact = true          # twelve similar covers: shown as a denser shelf
+
+[[categories]]
+id = "priest"
+en = "Service books of the clergy"
+ru = "Служебник и Требник"
+
+[[categories]]
+id = "typikon"
+en = "Typikon"
+ru = "Устав"
+
+[[categories]]
+id = "ascetic"
+en = "Ascetical writings"
+ru = "Аскетические сочинения"
+
+[[categories]]
+id = "other"
+en = "Other books"
+ru = "Другие книги"
+
+[[categories]]
+id = "sergian"
+en = "Liturgical books edited by the Commission of 1907-1917"
+ru = "Богослужебные книги, исправленные комиссией 1907-1917 гг."
+
+# ── Books ────────────────────────────────────────────────────────────────────
+# Within a category, books appear in the order listed here.
+# title_ru defaults to the manifest title; edition_ru to "publisher, year".
+
+[books.Evangelie1984]
+category = "scripture"
+title_en = "Gospel Book"
+[[books.Evangelie1984.pdf]]
+file = "Evangelie1984.pdf"
+offset = 1
+source = "https://web.archive.org/web/20160312052917if_/http://minei.ru/worship/evangelie/ev_mp_84.pdf"
+
+[books.Apostol1989]
+category = "scripture"
+title_en = "Apostol (Epistle Book)"
+[[books.Apostol1989.pdf]]
+file = "apostol2001.pdf"
+offset = 2
+source = "https://minei.ru/djvu/apostol.djvu"
+
+[books.AugmentedPsalter1978]
+category = "hours"
+title_en = "Augmented Psalter, part 1"
+title_ru = "Следованная Псалтирь, том 1"
+[[books.AugmentedPsalter1978.pdf]]
+file = "psaltyr1.pdf"
+offset = 0
+source = "https://minei.ru/djvu/psaltyr1.djvu"
+
+[books.AugmentedPsalter1993]
+category = "hours"
+title_en = "Augmented Psalter, part 2"
+# minei.ru's "part 2" scan; check that it is the 1993 Donskoy edition before enabling.
+[[books.AugmentedPsalter1993.pdf]]
+file = "psaltyr2.pdf"
+offset = 0
+source = "https://minei.ru/djvu/psaltyr2.djvu"
+
+[books.Chasoslov1991]
+category = "hours"
+title_en = "Horologion (Book of Hours)"
+[[books.Chasoslov1991.pdf]]
+file = "Chasoslov1991.pdf"
+offset = 0
+source = "https://minei.ru/djvu/chasoslov_2002.djvu"
+
+[books.Oktoih1981]
+category = "cycle"
+title_en = "Octoechos"
+[[books.Oktoih1981.pdf]]
+file = "Oktoih1981-1.pdf"
+label_en = "Part 1 (tones 1–4)"
+label_ru = "Часть 1 (гласы 1–4)"
+offset = 0
+source = "https://web.archive.org/web/20220819164236if_/https://www.minei.ru/worship/oktoikh_1.djvu"
+[[books.Oktoih1981.pdf]]
+file = "Oktoih1981-2.pdf"
+label_en = "Part 2 (tones 5–8)"
+label_ru = "Часть 2 (гласы 5–8)"
+from_chapter = "5_0"
+offset = 0
+source = "https://web.archive.org/web/20220819172240if_/https://www.minei.ru/worship/oktoikh_2.djvu"
+
+[books.PostnayaTriod1992]
+category = "cycle"
+title_en = "Lenten Triodion"
+[[books.PostnayaTriod1992.pdf]]
+file = "PostnayaTriod1992-1.pdf"
+label_en = "Part 1"
+label_ru = "Часть 1"
+offset = 0
+source = "https://web.archive.org/web/20220819163750if_/https://www.minei.ru/worship/p_triod1.djvu"
+[[books.PostnayaTriod1992.pdf]]
+file = "PostnayaTriod1992-2.pdf"
+label_en = "Part 2"
+label_ru = "Часть 2"
+from_chapter = "29lazar"
+offset = -750
+source = "https://web.archive.org/web/20220819164948if_/https://www.minei.ru/worship/p_triod2.djvu"
+
+[books.PostnayaTriod1915]
+category = "sergian"
+title_en = "Lenten Triodion (1915)"
+[[books.PostnayaTriod1915.pdf]]
+file = "PostnayaTriod1915.pdf"
+offset = 0
+source = "https://mds.storage.yandex.net/rdisk/ad5b82ec4b367537f09dd27540107be4c600f85cf69d7b3aab365f7f10fb3658/6ae3aa95/fY7LuEFSBFnaVqMzwxgfUK0ax6d-voBGn4GEIcZz0U9Lbu45wYC2ffhUbD0XJDPj7FHT8t2lNGZ9cljMilZKPw==?uid=0&filename=triodion1915.pdf&disposition=attachment&hash=KtE9H5zvdtiVptLKIr1gBvUcR5qAftSvX8acMqCYZfzTIkkVfmFhCXtdRL85t9CKq/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=application%2Fpdf&owner_uid=234242468&fsize=657004542&hid=33d7fdb2f8b6be048b75f872d7647135&media_type=document&tknv=v3&is_direct_zip_experiment=1&ts=65f0069a00f40&s=b06219a73fa1c2abaf3e47af6b596b73f47bed760cef13c812d5024207e85952&pb=U2FsdGVkX1-VWT47j6fyptlM1rlfbY4XbQuOjRpsXS12iXVUEgQJjfaGUxJYc-HTefJyMbUAe1kbp128f4NOMDo2TOPnOjuEYAA0wyf5R2A"
+
+[books.TsvetnayaTriod1992]
+category = "cycle"
+title_en = "Pentecostarion (Flowery Triodion)"
+[[books.TsvetnayaTriod1992.pdf]]
+file = "TsvetnayaTriod1992.pdf"
+offset = 2
+source = "https://web.archive.org/web/20220819170627if_/https://www.minei.ru/worship/c_triod.djvu"
+
+[books.Irmologii1995]
+category = "cycle"
+title_en = "Heirmologion"
+[[books.Irmologii1995.pdf]]
+file = "Irmologii1995.pdf"
+offset = 0
+source = "https://web.archive.org/web/20220819180218if_/https://www.minei.ru/worship/irmolog.djvu"
+
+# Menaion in the order of the church year, September to August.
+[books.MineyaSeptember1997]
+category = "menaion"
+title_en = "Menaion: September"
+[[books.MineyaSeptember1997.pdf]]
+file = "MineyaSeptember1997.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_09.djvu"
+
+[books.MineyaOctober1997]
+category = "menaion"
+title_en = "Menaion: October"
+[[books.MineyaOctober1997.pdf]]
+file = "MineyaOctober1997.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_10.djvu"
+
+[books.MineyaNovember1997]
+category = "menaion"
+title_en = "Menaion: November"
+[[books.MineyaNovember1997.pdf]]
+file = "MineyaNovember1997.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_11.djvu"
+
+[books.MineyaDecember1997]
+category = "menaion"
+title_en = "Menaion: December"
+[[books.MineyaDecember1997.pdf]]
+file = "MineyaDecember1997.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_12.djvu"
+
+[books.MineyaYanvar1996]
+category = "menaion"
+title_en = "Menaion: January"
+[[books.MineyaYanvar1996.pdf]]
+file = "MineyaYanvar1996.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_01.djvu"
+
+[books.MineyaFevral1996]
+category = "menaion"
+title_en = "Menaion: February"
+[[books.MineyaFevral1996.pdf]]
+file = "MineyaFevral1996.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_02.djvu"
+
+[books.MineyaMart1996]
+category = "menaion"
+title_en = "Menaion: March"
+[[books.MineyaMart1996.pdf]]
+file = "MineyaMart1996.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_03.djvu"
+
+[books.MineyaAprel1996]
+category = "menaion"
+title_en = "Menaion: April"
+[[books.MineyaAprel1996.pdf]]
+file = "MineyaAprel1996.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_04.djvu"
+
+[books.MineyaMay1996]
+category = "menaion"
+title_en = "Menaion: May"
+[[books.MineyaMay1996.pdf]]
+file = "MineyaMay1996.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_05.djvu"
+
+[books.MineyaIun1996]
+category = "menaion"
+title_en = "Menaion: June"
+[[books.MineyaIun1996.pdf]]
+file = "MineyaIun1996.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_06.djvu"
+
+[books.MineyaIul1996]
+category = "menaion"
+title_en = "Menaion: July"
+[[books.MineyaIul1996.pdf]]
+file = "MineyaIul1996.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_07.djvu"
+
+[books.MineyaAugust1996]
+category = "menaion"
+title_en = "Menaion: August"
+[[books.MineyaAugust1996.pdf]]
+file = "MineyaAugust1996.pdf"
+offset = 0
+source = "https://minei.ru/djvu/k_minea_08.djvu"
+
+[books.MineyaObshchaya2002]
+category = "menaion"
+title_en = "General Menaion"
+[[books.MineyaObshchaya2002.pdf]]
+file = "MineyaObshchaya2002.pdf"
+offset = 2
+source = "https://minei.ru/djvu/obsh_minea.djvu"
+
+[books.MineyaDopolnitelnaya2018]
+category = "menaion"
+title_en = "Supplementary Menaion"
+
+[books.Sluzhebnik1906]
+category = "priest"
+title_en = "Sluzhebnik (Priest's Service Book)"
+
+[books.Trebnik1906]
+category = "priest"
+title_en = "Trebnik (Book of Needs)"
+
+[books.StJamesLiturgyBulg1948]
+category = "priest"
+title_en = "Divine Liturgy of St James (Sofia, 1948)"
+[[books.StJamesLiturgyBulg1948.pdf]]
+file = "StJamesLiturgyBulg1948.pdf"
+offset = 0
+
+[books.StJamesLiturgyROCOR1970]
+category = "priest"
+title_en = "Divine Liturgy of St James (Rome, 1970)"
+
+[books.Tipikon]
+category = "typikon"
+title_en = "Typikon"
+edition_en = "Publishing Council of the Russian Orthodox Church, 2002"
+edition_ru = "Издательский совет РПЦ, 2002"
+[[books.Tipikon.pdf]]
+file = "Tipikon.pdf"
+offset = 0
+source = "https://minei.ru/djvu/tipikon.djvu"
+
+[books.Dobrotolyubie2000]
+category = "ascetic"
+title_en = "Philokalia (Dobrotolyubie)"

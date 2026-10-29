@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, lang_switch, cover, scan_href with context %}
+{% block title %}{{ book.title_ru }} — {{ site.title_en }}{% endblock %}
+{% block meta %}
+<meta name="description" content="{{ book.title_ru }}, {{ book.edition_ru }}. {{ site.title_en }}.">
+{% endblock %}
+{% block body %}
+<header class="masthead">
+  <div class="masthead-in">
+    <a class="brand" href="{{ root }}index.html">Ponomar</a>
+    <a class="crumb" href="{{ root }}index.html">{{ t('library') }}</a>
+    {{ lang_switch() }}
+  </div>
+</header>
+
+<main id="main" class="book-page">
+  <div class="book-head">
+    <div class="book-cover">{{ cover(book, root, small=False) }}</div>
+    <div class="book-meta">
+      <h1>{{ both(book.title_en, book.title_ru) }}</h1>
+      {% if book.title_en != book.title_ru %}<p class="book-native only-en" lang="ru">{{ book.title_ru }}</p>{% endif %}
+      <dl>
+        <dt>{{ t('edition') }}</dt><dd>{{ both(book.edition_en, book.edition_ru) }}</dd>
+        {% if book.note %}<dt>{{ t('source_note') }}</dt><dd class="note-text">{{ book.note }}</dd>{% endif %}
+      </dl>
+      <p class="book-actions">
+        {% if book.chapters %}<a class="btn btn-read" href="{{ book.chapters[0].href }}">{{ t('start_reading') }}</a>{% endif %}
+        {% for vol in book.volumes %}
+        <a class="btn btn-scan" href="{{ scan_href(root, book, vol.index) }}">{{ icon('scan') }}{{ t('scan') }}{% if book.volumes|length > 1 %}: {{ both(vol.label_en or ('Volume ' ~ (vol.index + 1)), vol.label_ru or ('Том ' ~ (vol.index + 1))) }}{% endif %}</a>
+        {% endfor %}
+      </p>
+      {% if not book.volumes %}<p class="muted">{{ t('no_scan') }}</p>{% endif %}
+    </div>
+  </div>
+
+  <section class="toc" aria-labelledby="h-toc">
+    <h2 id="h-toc">{{ t('contents') }}</h2>
+    <ol class="toc-list{% if book.chapters|length > 12 %} toc-cols{% endif %}">
+      {% for ch in book.chapters %}
+      <li><a href="{{ ch.href }}"><span class="toc-name">{{ ch.name }}</span>{% if ch.first_page %}<span class="toc-pages" lang="cu">{{ ch.first_label }}{% if ch.last_label != ch.first_label %}–{{ ch.last_label }}{% endif %}</span>{% endif %}</a></li>
+      {% endfor %}
+    </ol>
+  </section>
+</main>
+
+<footer class="colophon">
+  <p><a href="{{ site.report_issue }}">{{ t('report_error') }}</a> <a href="{{ site.repository }}/tree/master/{{ book.id }}">{{ t('source_on_github') }}</a></p>
+</footer>
+{% endblock %}

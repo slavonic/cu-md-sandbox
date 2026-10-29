@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, lang_switch, cover, scan_href with context %}
+{% block meta %}
+<meta name="description" content="{{ site.title_en }}. Church Slavonic liturgical books in Unicode: read online, copy, print, and compare with the scans.">
+{% endblock %}
+{% block body %}
+<header class="masthead">
+  <div class="masthead-in">
+    <a class="brand" href="{{ root }}index.html">Ponomar</a>
+    {{ lang_switch() }}
+  </div>
+</header>
+
+<main id="main" class="library">
+  <section class="intro">
+    <h1>{{ both(site.title_en, site.title_ru) }}</h1>
+    <p class="tagline">{{ t('tagline') }}</p>
+    <figure class="verse" lang="cu">
+      <blockquote class="cu"><span class="bukvitsa">Д</span>а и҆спра́витсѧ мл҃тва моѧ̀, ꙗ҆́кѡ кади́ло пред̾ тобо́ю, воздѣѧ́нїе рꙋкꙋ̀ моє́ю, же́ртва вече́рнѧѧ.</blockquote>
+      <figcaption><span class="l10n" lang="en">Psalm 140:2 (LXX), sung at Vespers</span><span class="l10n" lang="ru">Пс. 140:2, на вечерне</span></figcaption>
+    </figure>
+  </section>
+
+  <div class="finder" role="search">
+    <label class="search">
+      {{ icon('search') }}
+      <span class="sr-only">{{ t('find_book') }}</span>
+      <input type="search" id="book-filter" autocomplete="off" spellcheck="false" data-i18n-placeholder="find_placeholder" placeholder="{{ en('find_placeholder') }}">
+    </label>
+    <nav class="shelf-index" aria-label="Sections">
+      {% for c in categories %}<a href="#cat-{{ c.id }}">{{ both(c.en, c.ru) }}</a>{% endfor %}
+    </nav>
+  </div>
+
+  <p class="no-match" hidden>{{ t('no_match') }} <button type="button" class="linklike" data-clear-filter>{{ t('clear_search') }}</button></p>
+
+  <div class="shelves">
+  {% for c in categories %}
+  <section style="--n:{{ c.books|length }}" class="shelf{% if c.compact %} shelf-compact{% endif %}" id="cat-{{ c.id }}" aria-labelledby="h-{{ c.id }}">
+    <h2 id="h-{{ c.id }}">{{ both(c.en, c.ru) }}</h2>
+    <ul class="books">
+      {% for b in c.books %}
+      <li class="book" data-search="{{ (b.title_en ~ ' ' ~ b.title_ru ~ ' ' ~ b.id ~ ' ' ~ b.edition_ru ~ ' ' ~ b.year)|lower }}">
+        <a class="cover" href="{{ root }}{{ b.id }}/index.html" tabindex="-1" aria-hidden="true">{{ cover(b, root) }}</a>
+        <h3 class="book-title"><a href="{{ root }}{{ b.id }}/index.html">{{ both(b.title_en, b.title_ru) }}</a></h3>
+        <p class="book-edition">{{ both(b.edition_en, b.edition_ru) }}</p>
+        <p class="book-actions">
+          {% if b.chapters %}<a class="btn btn-read" href="{{ root }}{{ b.id }}/{{ b.chapters[0].href }}">{{ t('read') }}</a>{% endif %}
+          {% if b.volumes %}<a class="btn btn-scan" href="{{ scan_href(root, b) }}">{{ icon('scan') }}{{ t('scan_short') }}</a>{% endif %}
+        </p>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+  </div>
+
+  <section class="about" aria-labelledby="h-about">
+    <h2 id="h-about">{{ t('about_title') }}</h2>
+    <p>{{ t('about_text') }}</p>
+    <p class="about-links">
+      <a href="{{ site.fonts_help }}" target="_blank" rel="noopener">{{ t('get_fonts') }}</a>
+      <a href="{{ site.repository }}">{{ t('source_on_github') }}</a>
+      <a href="{{ site.report_issue }}">{{ t('report_error') }}</a>
+    </p>
+  </section>
+</main>
+
+<footer class="colophon">
+  <p><a href="{{ site.sci }}">{{ t('supported_by') }}</a></p>
+</footer>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, lang_switch with context %}
+{% block title %}{{ en('scan_of') }} — {{ site.title_en }}{% endblock %}
+{% block meta %}<meta name="robots" content="noindex">{% endblock %}
+{% block body %}
+<header class="readerbar scanbar">
+  <a class="iconbtn scan-back" href="index.html" data-i18n-title="back_to_text">{{ icon('prev') }}<span class="sr-only">{{ t('back_to_text') }}</span></a>
+  <a class="readerbar-book scan-book" href="index.html"></a>
+  <div class="readerbar-tools">
+    <label class="vol-select" hidden><span class="sr-only">{{ t('volume') }}</span><select></select></label>
+    <a class="btn btn-ghost scan-totext hide-sm" href="#" hidden>{{ icon('book') }}{{ t('show_in_text') }}</a>
+    <a class="iconbtn scan-download" href="#" download data-i18n-title="download_pdf">{{ icon('download') }}<span class="sr-only">{{ t('download_pdf') }}</span></a>
+    {{ lang_switch() }}
+  </div>
+</header>
+<main id="main" class="scan-main">
+  <iframe class="scan-frame" title="PDF" src="about:blank" allowfullscreen></iframe>
+  <p class="scan-missing" hidden>{{ t('scan_missing') }} <a href="index.html">{{ t('library') }}</a></p>
+</main>
+{% endblock %}

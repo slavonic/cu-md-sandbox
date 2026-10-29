@@ -1,0 +1,27 @@
+{% from "_macros.html" import icon, lang_switch with context %}<!DOCTYPE html>
+<html lang="en" data-ui="en" data-page="{{ page_type }}" data-root="{{ root }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site.title_en }}{% endblock %}</title>
+{% block meta %}{% endblock %}
+<script>
+/* apply saved reading preferences before the first paint */
+(function(){var s={};try{s=JSON.parse(localStorage.getItem("maktabah"))||{}}catch(e){}
+var d=document.documentElement,q=null;try{q=new URLSearchParams(location.search).get("lang")}catch(e){}
+var l=(q==="ru"||q==="en")?q:(s.lang||"en");d.setAttribute("data-ui",l);d.lang=l;
+if(s.theme)d.setAttribute("data-theme",s.theme);d.setAttribute("data-pages",s.pages||"margin");
+if(s.size)d.style.setProperty("--cu-size",s.size+"px");if(s.face&&{{ typefaces|map("first")|list|tojson }}.indexOf(s.face)>=0)d.style.setProperty("--cu-face",'"'+s.face+'"');})();
+</script>
+<link rel="stylesheet" href="{{ fonts_css }}">
+<link rel="stylesheet" href="{{ root }}assets/maktabah.css?v={{ v }}">
+<link rel="icon" href="{{ root }}assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#main">{{ t('skip') }}</a>
+{% block body %}{% endblock %}
+<div class="toast" role="status" aria-live="polite" hidden></div>
+<script src="{{ root }}assets/library.js?v={{ build_id }}"></script>
+<script src="{{ root }}assets/maktabah.js?v={{ v }}"></script>
+</body>
+</html>

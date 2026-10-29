@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, lang_switch with context %}
+{% block title %}{{ chapter.name }} — {{ book.title_ru }}{% endblock %}
+{% block meta %}
+<meta name="description" content="{{ book.title_ru }} ({{ book.edition_ru }}): {{ chapter.name }}">
+{% if prev %}<link rel="prev" href="{{ prev.href }}">{% endif %}
+{% if next %}<link rel="next" href="{{ next.href }}">{% endif %}
+{% endblock %}
+{% block body %}
+<header class="readerbar">
+  <button type="button" class="iconbtn" data-open="drawer" aria-controls="drawer" aria-expanded="false" data-i18n-title="open_contents">{{ icon('menu') }}<span class="sr-only">{{ t('open_contents') }}</span></button>
+  <a class="readerbar-book" href="index.html">{{ both(book.title_en, book.title_ru) }}<span class="readerbar-year"> {{ book.year }}</span></a>
+  <div class="readerbar-tools">
+    <button type="button" class="iconbtn" data-open="settings" aria-controls="settings" aria-expanded="false" data-i18n-title="reading_settings">{{ icon('type') }}<span class="sr-only">{{ t('reading_settings') }}</span></button>
+    <button type="button" class="iconbtn" data-action="copy" data-i18n-title="copy_section">{{ icon('copy') }}<span class="sr-only">{{ t('copy_section') }}</span></button>
+    <button type="button" class="iconbtn hide-sm" data-action="print" data-i18n-title="print">{{ icon('print') }}<span class="sr-only">{{ t('print') }}</span></button>
+    {{ lang_switch() }}
+  </div>
+</header>
+
+<div class="popover" id="settings" role="dialog" aria-labelledby="settings-h" hidden>
+  <h2 id="settings-h" class="sr-only">{{ t('reading_settings') }}</h2>
+  <div class="setting">
+    <span class="setting-label">{{ t('text_size') }}</span>
+    <div class="stepper">
+      <button type="button" data-size="-1" data-i18n-title="smaller"><span aria-hidden="true">A−</span><span class="sr-only">{{ t('smaller') }}</span></button>
+      <output id="size-out" aria-live="polite">22</output>
+      <button type="button" data-size="1" data-i18n-title="larger"><span aria-hidden="true">A+</span><span class="sr-only">{{ t('larger') }}</span></button>
+    </div>
+  </div>
+  <fieldset class="setting">
+    <legend class="setting-label">{{ t('typeface') }}</legend>
+    <div class="faces">
+      {% for fam, label in typefaces %}
+      <label class="face"><input type="radio" name="face" value="{{ fam }}"><span class="face-sample" style="font-family:'{{ fam }}'" lang="cu">Бл҃гослове́нъ</span><span class="face-name">{{ label }}</span></label>
+      {% endfor %}
+    </div>
+  </fieldset>
+  <fieldset class="setting">
+    <legend class="setting-label">{{ t('theme') }}</legend>
+    <div class="segmented">
+      <label><input type="radio" name="theme" value="light"><span>{{ t('theme_light') }}</span></label>
+      <label><input type="radio" name="theme" value="sepia"><span>{{ t('theme_sepia') }}</span></label>
+      <label><input type="radio" name="theme" value="dark"><span>{{ t('theme_dark') }}</span></label>
+    </div>
+  </fieldset>
+  <fieldset class="setting">
+    <legend class="setting-label">{{ t('page_numbers') }}</legend>
+    <div class="segmented">
+      <label><input type="radio" name="pages" value="margin"><span>{{ t('pages_margin') }}</span></label>
+      <label><input type="radio" name="pages" value="inline"><span>{{ t('pages_inline') }}</span></label>
+      <label><input type="radio" name="pages" value="hidden"><span>{{ t('pages_hidden') }}</span></label>
+    </div>
+  </fieldset>
+  <p class="setting-hint">{{ t('fonts_hint') }} <a href="{{ site.fonts_help }}" target="_blank" rel="noopener">{{ t('get_fonts') }}</a></p>
+</div>
+
+<nav class="drawer" id="drawer" aria-labelledby="drawer-h" hidden>
+  <div class="drawer-head">
+    <h2 id="drawer-h" class="sr-only">{{ t('open_contents') }}</h2>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tab-book" aria-controls="pane-book" aria-selected="true">{{ t('this_book') }}</button>
+      <button type="button" role="tab" id="tab-lib" aria-controls="pane-lib" aria-selected="false">{{ t('library') }}</button>
+    </div>
+    <button type="button" class="iconbtn" data-close data-i18n-title="close">{{ icon('close') }}<span class="sr-only">{{ t('close') }}</span></button>
+  </div>
+  <div class="pane" id="pane-book" role="tabpanel" aria-labelledby="tab-book">
+    <p class="pane-title"><a href="index.html">{{ both(book.title_en, book.title_ru) }}</a><span class="muted"> {{ book.year }}</span></p>
+    <ol class="nav-chapters">
+      {% for ch in book.chapters %}
+      <li{% if ch.file == chapter.file %} class="current"{% endif %}>
+        <a href="{{ ch.href }}"{% if ch.file == chapter.file %} aria-current="page"{% endif %}>{{ ch.name }}</a>
+        {% if ch.file == chapter.file and chapter.headings %}
+        <ol class="nav-headings">
+          {% for h in chapter.headings %}<li><a href="#{{ h.id }}" lang="cu">{{ h.text }}</a></li>{% endfor %}
+        </ol>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+  <div class="pane" id="pane-lib" role="tabpanel" aria-labelledby="tab-lib" hidden>
+    <div class="nav-library" data-current="{{ book.id }}"></div>
+  </div>
+</nav>
+<div class="scrim" hidden></div>
+
+<div class="reader">
+  <main id="main" class="page">
+    <article class="text" lang="cu" data-book="{{ book.id }}" data-chapter="{{ chapter.file }}">
+      <header class="chapter-head">
+        <p class="chapter-book" lang="ru">{{ book.title_ru }}</p>
+        <h1 class="chapter-title" lang="ru">{{ chapter.name }}</h1>
+      </header>
+      <div class="cu body">
+{{ chapter.html|safe }}
+      </div>
+    </article>
+
+    <nav class="pager" aria-label="{{ en('previous') }} / {{ en('next') }}">
+      {% if prev %}<a class="pager-prev" href="{{ prev.href }}" rel="prev"><span class="pager-dir">{{ icon('prev') }}{{ t('previous') }}</span><span class="pager-name" lang="ru">{{ prev.name }}</span></a>{% else %}<span></span>{% endif %}
+      {% if next %}<a class="pager-next" href="{{ next.href }}" rel="next"><span class="pager-dir">{{ t('next') }}{{ icon('next') }}</span><span class="pager-name" lang="ru">{{ next.name }}</span></a>{% else %}<a class="pager-next" href="index.html"><span class="pager-dir">{{ t('contents') }}</span><span class="pager-name" lang="ru">{{ book.title_ru }}</span></a>{% endif %}
+    </nav>
+  </main>
+
+  <aside class="scan-panel" id="scan-panel" aria-labelledby="scan-h" hidden>
+    <div class="scan-panel-bar">
+      <h2 id="scan-h" class="scan-panel-title">{{ t('scan_of') }} <span class="scan-panel-page" lang="cu"></span></h2>
+      <a class="iconbtn scan-full" href="#" data-i18n-title="open_full">{{ icon('expand') }}<span class="sr-only">{{ t('open_full') }}</span></a>
+      <button type="button" class="iconbtn" data-close-scan data-i18n-title="close_scan">{{ icon('close') }}<span class="sr-only">{{ t('close_scan') }}</span></button>
+    </div>
+    <iframe class="scan-frame" title="PDF" src="about:blank"></iframe>
+  </aside>
+</div>
+{% endblock %}
