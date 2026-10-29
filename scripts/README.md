@@ -8,7 +8,7 @@ bilingual (English / Russian), mobile-friendly website. They replace `bookbuild.
 scripts/
   build_library.py   build the whole site (or some books)
   cumd_web.py        Markdown → HTML: the cumd rules + page links, notes, images
-  library.toml       catalogue: English titles, front-page sections, PDF scans
+  library.toml       catalog: English titles, front-page sections, PDF scans
   i18n.py            interface strings in English and Russian
   prepare_pdf.py     download DJVU/PDF scans, convert, linearize for the web
   templates/         Jinja2 page templates
