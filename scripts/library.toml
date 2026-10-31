@@ -129,14 +129,14 @@ file = "Oktoih1981-1.pdf"
 label_en = "Part 1 (tones 1–4)"
 label_ru = "Часть 1 (гласы 1–4)"
 offset = 0
-source = "https://web.archive.org/web/20220819164236if_/https://www.minei.ru/worship/oktoikh_1.djvu"
+source = "https://web.archive.org/web/20160404055953if_/http://minei.ru/worship/oktoikh_1.djvu"
 [[books.Oktoih1981.pdf]]
 file = "Oktoih1981-2.pdf"
 label_en = "Part 2 (tones 5–8)"
 label_ru = "Часть 2 (гласы 5–8)"
 from_chapter = "5_0"
 offset = 0
-source = "https://web.archive.org/web/20220819172240if_/https://www.minei.ru/worship/oktoikh_2.djvu"
+source = "https://web.archive.org/web/20160404104920if_/http://minei.ru/worship/oktoikh_2.djvu"
 
 [books.PostnayaTriod1992]
 category = "cycle"
@@ -146,14 +146,14 @@ file = "PostnayaTriod1992-1.pdf"
 label_en = "Part 1"
 label_ru = "Часть 1"
 offset = 0
-source = "https://web.archive.org/web/20220819163750if_/https://www.minei.ru/worship/p_triod1.djvu"
+source = "https://web.archive.org/web/20170413104533if_/http://minei.ru/worship/p_triod1.djvu"
 [[books.PostnayaTriod1992.pdf]]
 file = "PostnayaTriod1992-2.pdf"
 label_en = "Part 2"
 label_ru = "Часть 2"
 from_chapter = "29lazar"
 offset = -750
-source = "https://web.archive.org/web/20220819164948if_/https://www.minei.ru/worship/p_triod2.djvu"
+source = "https://web.archive.org/web/20200910233530if_/http://minei.ru/worship/p_triod2.djvu"
 
 [books.PostnayaTriod1915]
 category = "sergian"
@@ -161,7 +161,6 @@ title_en = "Lenten Triodion (1915)"
 [[books.PostnayaTriod1915.pdf]]
 file = "PostnayaTriod1915.pdf"
 offset = 0
-source = "https://mds.storage.yandex.net/rdisk/ad5b82ec4b367537f09dd27540107be4c600f85cf69d7b3aab365f7f10fb3658/6ae3aa95/fY7LuEFSBFnaVqMzwxgfUK0ax6d-voBGn4GEIcZz0U9Lbu45wYC2ffhUbD0XJDPj7FHT8t2lNGZ9cljMilZKPw==?uid=0&filename=triodion1915.pdf&disposition=attachment&hash=KtE9H5zvdtiVptLKIr1gBvUcR5qAftSvX8acMqCYZfzTIkkVfmFhCXtdRL85t9CKq/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=application%2Fpdf&owner_uid=234242468&fsize=657004542&hid=33d7fdb2f8b6be048b75f872d7647135&media_type=document&tknv=v3&is_direct_zip_experiment=1&ts=65f0069a00f40&s=b06219a73fa1c2abaf3e47af6b596b73f47bed760cef13c812d5024207e85952&pb=U2FsdGVkX1-VWT47j6fyptlM1rlfbY4XbQuOjRpsXS12iXVUEgQJjfaGUxJYc-HTefJyMbUAe1kbp128f4NOMDo2TOPnOjuEYAA0wyf5R2A"
 
 [books.TsvetnayaTriod1992]
 category = "cycle"
@@ -169,7 +168,7 @@ title_en = "Pentecostarion (Flowery Triodion)"
 [[books.TsvetnayaTriod1992.pdf]]
 file = "TsvetnayaTriod1992.pdf"
 offset = 2
-source = "https://web.archive.org/web/20220819170627if_/https://www.minei.ru/worship/c_triod.djvu"
+source = "https://web.archive.org/web/20200910233849if_/http://minei.ru/worship/c_triod.djvu"
 
 [books.Irmologii1995]
 category = "cycle"
@@ -177,7 +176,7 @@ title_en = "Heirmologion"
 [[books.Irmologii1995.pdf]]
 file = "Irmologii1995.pdf"
 offset = 0
-source = "https://web.archive.org/web/20220819180218if_/https://www.minei.ru/worship/irmolog.djvu"
+source = "https://minei.ru/djvu/irmolog.djvu"
 
 # Menaion in the order of the church year, September to August.
 [books.MineyaSeptember1997]
