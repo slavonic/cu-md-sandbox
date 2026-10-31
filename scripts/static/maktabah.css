@@ -397,6 +397,10 @@ html.scan-open .page { padding-left: 4.8rem; }
 html[data-page="scan"] body { height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
 .scan-main { flex: 1; display: flex; min-height: 0; }
 .scan-main .scan-frame { height: 100%; }
+.scan-problem { position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%); max-width: min(26rem, 90%); padding: 1rem 1.25rem; text-align: center; background: var(--paper); color: var(--ink); border: 1px solid var(--rule); border-radius: 6px; box-shadow: 0 10px 30px -12px rgb(0 0 0 / .4); z-index: 3; }
+.scan-problem a { font-weight: 600; }
+.scan-main, .scan-panel { position: relative; }
+.scan-panel { position: sticky; }
 .scan-missing { margin: 3rem auto; padding: 0 1rem; max-width: 30rem; text-align: center; }
 .vol-select select { height: 36px; border: 1px solid var(--rule); border-radius: 3px; background: var(--paper); padding: 0 .4rem; max-width: 40vw; }
 .scanbar .btn { min-height: 34px; font-size: .82rem; margin-right: .25rem; }

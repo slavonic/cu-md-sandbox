@@ -193,6 +193,25 @@
     var file = new URL(ROOT + pdfUrl, location.href).pathname;
     return ROOT + LIB.pdfjs + "?file=" + encodeURIComponent(file) + "#page=" + index + "&zoom=page-fit&pagemode=none";
   }
+  /* pdf.js fails silently when its scripts are blocked (e.g. .mjs served with the wrong MIME type):
+     if it has not started after a few seconds, say so and offer the PDF itself. */
+  function watchViewer(frame, vol, index) {
+    var host = frame.parentNode, old = $(".scan-problem", host);
+    if (old) old.remove();
+    clearTimeout(frame._watch);
+    var started = Date.now();
+    (function check() {
+      var ok = false;
+      try { var app = frame.contentWindow.PDFViewerApplication; ok = !!(app && app.initialized); } catch (e) { ok = true; /* cross-origin: cannot tell */ }
+      if (ok) return;
+      if (Date.now() - started < 8000) { frame._watch = setTimeout(check, 500); return; }
+      var box = D.createElement("div"); box.className = "scan-problem"; box.setAttribute("role", "alert");
+      var a = D.createElement("a"); a.href = ROOT + vol.url + "#page=" + index; a.textContent = tr("open_pdf");
+      box.appendChild(D.createTextNode(tr("viewer_failed") + " ")); box.appendChild(a);
+      host.appendChild(box);
+      if (window.console) console.warn("pdf.js did not start. Check that " + ROOT + LIB.pdfjs.replace(/web\/viewer\.html$/, "") + "build/pdf.mjs is served as text/javascript.");
+    })();
+  }
   function openScanPanel(a) {
     var t = scanTarget(a.href); if (!t) return false;
     var panel = $("#scan-panel"), frame = $(".scan-frame", panel);
@@ -204,7 +223,7 @@
     var app = null;
     try { app = frame.contentWindow.PDFViewerApplication; } catch (e) { app = null; }
     if (panelUrl === t.vol.url && app && app.pdfDocument) { app.page = t.index; }
-    else { panelUrl = t.vol.url; frame.src = viewerSrc(t.vol.url, t.index); }
+    else { panelUrl = t.vol.url; frame.src = viewerSrc(t.vol.url, t.index); watchViewer(frame, t.vol, t.index); }
     return true;
   }
   function closeScanPanel() {
@@ -294,6 +313,7 @@
     if (!t) { frame.hidden = true; $(".scan-missing").hidden = false; $(".scan-download").hidden = true; if (b) $(".scan-book").textContent = pick(b.title); return; }
     scanState = t;
     frame.src = viewerSrc(t.vol.url, t.index);
+    watchViewer(frame, t.vol, t.index);
     $(".scan-download").href = ROOT + t.vol.url;
     // link back to the text: the section whose pages include this one
     var page = q.get("p") ? parseInt(q.get("p"), 10) : t.index - (t.vol.offset || 0);

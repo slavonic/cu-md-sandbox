@@ -299,6 +299,15 @@ class SiteBuilder:
         print(f"Self-hosted {len(rules)} font files from {src}")
 
     def install_pdfjs(self):
+        self._install_pdfjs()
+        # pdf.js 4+ is made of .mjs modules; browsers refuse them unless served as JavaScript.
+        # Apache honours this file; for nginx see scripts/README.md.
+        (self.out / "pdfjs").mkdir(parents=True, exist_ok=True)
+        (self.out / "pdfjs" / ".htaccess").write_text(
+            "# pdf.js modules must be served as JavaScript or the viewer stays blank\n"
+            "AddType text/javascript .mjs\n", encoding="utf-8")
+
+    def _install_pdfjs(self):
         target = self.out / "pdfjs"
         if self.args.pdfjs_dir:
             if target.exists():

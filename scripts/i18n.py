@@ -76,6 +76,8 @@ STRINGS = {
     "show_in_text": ("Show this page in the text", "Найти страницу в тексте"),
     "open_full": ("Open full screen", "Открыть на весь экран"),
     "download_pdf": ("Download PDF", "Скачать PDF"),
+    "viewer_failed": ("The page viewer did not start. You can open the PDF directly instead.", "Просмотрщик страниц не запустился. Можно открыть PDF напрямую."),
+    "open_pdf": ("Open the PDF", "Открыть PDF"),
     "scan_missing": ("This book has no page scans yet.", "Для этой книги пока нет сканов."),
     "close_scan": ("Close the scan", "Закрыть скан"),
     "language": ("Language", "Язык"),

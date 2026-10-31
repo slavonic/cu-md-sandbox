@@ -8,7 +8,7 @@ bilingual (English / Russian), mobile-friendly website. They replace `bookbuild.
 scripts/
   build_library.py   build the whole site (or some books)
   cumd_web.py        Markdown → HTML: the cumd rules + page links, notes, images
-  library.toml       catalog: English titles, front-page sections, PDF scans
+  library.toml       catalogue: English titles, front-page sections, PDF scans
   i18n.py            interface strings in English and Russian
   prepare_pdf.py     download DJVU/PDF scans, convert, linearize for the web
   templates/         Jinja2 page templates
@@ -78,6 +78,14 @@ books (cumd expects the number first); they now are.
 3. Set each volume’s `offset` (PDF page index − printed page number). Open any section,
    click a page number, and compare. Multi-volume books use `from_chapter` to say which
    sections belong to the second PDF.
+
+**If the viewer stays blank:** pdf.js is made of `.mjs` modules, and browsers refuse them
+unless the server sends `Content-Type: text/javascript`. Many servers don't know `.mjs`.
+The build writes `pdfjs/.htaccess` for Apache (needs `AllowOverride FileInfo`). For nginx add to
+`mime.types` (or the server block): `types { text/javascript mjs; }`. Check with
+`curl -I https://your.site/maktabah/pdfjs/build/pdf.mjs`. The page now says so after 8 seconds
+and offers the PDF itself instead of staying empty. Also make sure the server does not send
+`X-Frame-Options: DENY` (use `SAMEORIGIN`), because the viewer runs in an iframe.
 
 On wide screens a page number opens the scan beside the text; on phones (or with
 Ctrl/⌘-click) it opens the full-screen viewer, which has a “Show this page in the text”
