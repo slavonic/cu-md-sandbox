@@ -40,7 +40,7 @@ jobs:
 
       - name: Build
         run: >
-          python scripts/build_library.py --out _site --fetch-pdfjs
+          python scripts/build_library.py --out _site --fonts-dir scripts/fonts --fetch-pdfjs
           --base-url "${{ vars.SITE_URL || 'https://www.ponomar.net/maktabah/' }}"
 
       - name: Keep the built site as a downloadable artifact
