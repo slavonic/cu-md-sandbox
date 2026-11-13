@@ -286,6 +286,17 @@ source = "https://minei.ru/djvu/obsh_minea.djvu"
 [books.MineyaDopolnitelnaya2018]
 category = "menaion"
 title_en = "Supplementary Menaion"
+[[books.MineyaDopolnitelnaya2018.pdf]]
+file = "MineyaDopolnitelnaya2018-1.pdf"
+label_en = "Part 1 (September–February)"
+label_ru = "Часть 1 (сентябрь–февраль)"
+offset = 3
+[[books.MineyaDopolnitelnaya2018.pdf]]
+file = "MineyaDopolnitelnaya2018-2.pdf"
+label_en = "Part 2 (March–August)"
+label_ru = "Часть 2 (март–август)"
+from_chapter = "03_10"
+offset = 3
 
 [books.Sluzhebnik1906]
 category = "priest"

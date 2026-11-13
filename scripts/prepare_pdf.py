@@ -3,17 +3,22 @@
 Prepare the PDF scans that the library links to.
 
 For every PDF volume in library.toml that has a ``source`` (a DJVU or PDF scan,
-e.g. on minei.ru), this script downloads the scan, converts DJVU to PDF and
-*linearizes* the result ("fast web view").  A linearized PDF served by a web
-server that supports HTTP range requests (Apache and nginx do by default) lets
-pdf.js open page 600 of a 900-page book without downloading the whole file.
+e.g. on minei.ru), this script downloads the scan, converts DJVU to PDF,
+downsamples the page images with Ghostscript and *linearizes* the result
+("fast web view").  A linearized PDF served by a web server that supports HTTP
+range requests (Apache and nginx do by default) lets pdf.js open page 600 of a
+900-page book without downloading the whole file.
 
     python scripts/prepare_pdf.py --out /var/www/maktabah/pdf            # all volumes
     python scripts/prepare_pdf.py --out pdf Chasoslov1991 Tipikon         # some books
     python scripts/prepare_pdf.py --out pdf --check                       # what is there
+    python scripts/prepare_pdf.py --out pdf --input scans/Tipikon.djvu    # a local file
 
-Needs: ``ddjvu`` (package djvulibre-bin) for DJVU sources and ``qpdf``.
-    sudo apt install djvulibre-bin qpdf
+``--input`` takes local DJVU or PDF files instead of library.toml; each is
+written to OUT under the same name with a .pdf extension.
+
+Needs: ``ddjvu`` (package djvulibre-bin) for DJVU sources, ``gs`` and ``qpdf``.
+    sudo apt install djvulibre-bin ghostscript qpdf
 
 After converting, set ``offset`` in library.toml for each volume: open the PDF,
 find the page that carries printed page number 1 (or the first number used in
@@ -56,17 +61,55 @@ def download(url: str, dest: Path):
         shutil.copyfileobj(r, f, length=1 << 20)
 
 
-def convert(src: Path, out: Path, quality: int):
-    with tempfile.TemporaryDirectory() as tmp:
+def size(path: Path) -> str:
+    return f"{path.stat().st_size / 2**20:.1f} MB"
+
+
+def downsample(src: Path, dest: Path, dpi: int, qfactor: float, gray: bool):
+    """Re-encode every page image as JPEG at most `dpi`.
+
+    Ghostscript's presets keep lossless (Flate) images and pass existing JPEGs
+    through untouched unless they are 1.5× over the target resolution, which
+    left ddjvu's output hundreds of MB.  So force JPEG, recompression and a
+    downsampling threshold of 1.0.
+    """
+    cmd = ["gs", "-sDEVICE=pdfwrite", "-dCompatibilityLevel=1.5", "-dNOPAUSE", "-dBATCH", "-dQUIET",
+           "-dPDFSETTINGS=/ebook", "-dPassThroughJPEGImages=false"]
+    for kind in ("Color", "Gray"):
+        cmd += [f"-dDownsample{kind}Images=true", f"-d{kind}ImageResolution={dpi}",
+                f"-d{kind}ImageDownsampleThreshold=1.0", f"-d{kind}ImageDownsampleType=/Bicubic",
+                f"-dAutoFilter{kind}Images=false", f"-d{kind}ImageFilter=/DCTEncode"]
+    if gray:
+        cmd += ["-sColorConversionStrategy=Gray", "-dProcessColorModel=/DeviceGray"]
+    jpeg = f"<< /QFactor {qfactor} /Blend 1 /HSamples [2 1 1 2] /VSamples [2 1 1 2] >>"
+    cmd += [f"-sOutputFile={dest}",
+            "-c", f"<< /ColorImageDict {jpeg} /GrayImageDict {jpeg} >> setdistillerparams",
+            "-f", str(src)]
+    subprocess.run(cmd, check=True)
+
+
+def convert(src: Path, out: Path, args):
+    # The raw DJVU → PDF output can be several GB, so work next to `out`
+    # rather than in /tmp, which is often small.
+    with tempfile.TemporaryDirectory(dir=out.parent, prefix=".prepare-") as tmp:
         tmp_pdf = Path(tmp) / "raw.pdf"
         if src.suffix.lower() == ".djvu":
             need("ddjvu", "djvulibre-bin")
             print("    converting DJVU → PDF (this can take a few minutes)")
-            subprocess.run(["ddjvu", "-format=pdf", f"-quality={quality}", "-verbose", str(src), str(tmp_pdf)], check=True)
+            subprocess.run(["ddjvu", "-format=pdf", f"-quality={args.quality}", "-verbose", str(src), str(tmp_pdf)], check=True)
         else:
-            shutil.copy2(src, tmp_pdf)
+            tmp_pdf = src
+        if args.dpi:
+            small_pdf = Path(tmp) / "small.pdf"
+            print(f"    downsampling to {args.dpi} dpi ({size(tmp_pdf)} before)")
+            downsample(tmp_pdf, small_pdf, args.dpi, args.jpeg_q, args.gray)
+            tmp_pdf = small_pdf
         print("    linearizing for fast web view")
-        subprocess.run(["qpdf", "--linearize", "--object-streams=generate", str(tmp_pdf), str(out)], check=True)
+        # qpdf exits with 3 when it succeeded with warnings
+        r = subprocess.run(["qpdf", "--linearize", "--object-streams=generate", str(tmp_pdf), str(out)])
+        if r.returncode not in (0, 3):
+            raise subprocess.CalledProcessError(r.returncode, "qpdf")
+    print(f"    done: {page_count(out)} pages, {size(out)}")
 
 
 def main(argv=None):
@@ -76,16 +119,40 @@ def main(argv=None):
     p.add_argument("--config", type=Path, default=HERE / "library.toml")
     p.add_argument("--cache", type=Path, default=Path.home() / ".cache" / "maktabah" / "sources",
                    help="where downloaded originals are kept (default: %(default)s)")
+    p.add_argument("--input", type=Path, nargs="+", metavar="FILE",
+                   help="convert these local DJVU/PDF files instead of the library.toml sources")
     p.add_argument("--quality", type=int, default=85, help="ddjvu JPEG quality for DJVU conversion (default: %(default)s)")
+    p.add_argument("--dpi", type=int, default=150,
+                   help="downsample page images to this resolution; 0 skips Ghostscript (default: %(default)s)")
+    p.add_argument("--jpeg-q", type=float, default=0.9,
+                   help="Ghostscript JPEG QFactor: higher is smaller, 0.76 is sharper (default: %(default)s)")
+    p.add_argument("--gray", action="store_true", help="convert pages to grayscale (red rubrics turn gray)")
     p.add_argument("--force", action="store_true", help="rebuild PDFs that already exist")
     p.add_argument("--check", action="store_true", help="only report which PDFs exist and their page counts")
     args = p.parse_args(argv)
 
-    with open(args.config, "rb") as f:
-        config = tomllib.load(f)
     if not args.check:
         need("qpdf", "qpdf")
+        if args.dpi:
+            need("gs", "ghostscript")
     args.out.mkdir(parents=True, exist_ok=True)
+
+    if args.input:
+        for src in args.input:
+            out = args.out / (src.stem + ".pdf")
+            print(f"{src}")
+            if not src.is_file():
+                print("    not found")
+            elif out.resolve() == src.resolve():
+                print("    output would overwrite the input; choose another --out")
+            elif out.exists() and not args.force:
+                print(f"    already there ({page_count(out)} pages); use --force to rebuild")
+            else:
+                convert(src, out, args)
+        return
+
+    with open(args.config, "rb") as f:
+        config = tomllib.load(f)
     args.cache.mkdir(parents=True, exist_ok=True)
 
     for bid, cfg in config.get("books", {}).items():
@@ -107,8 +174,7 @@ def main(argv=None):
             src = args.cache / Path(src_url).name
             if not src.exists():
                 download(src_url, src)
-            convert(src, out, args.quality)
-            print(f"    done: {page_count(out)} pages")
+            convert(src, out, args)
 
 
 if __name__ == "__main__":

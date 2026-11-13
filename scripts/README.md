@@ -69,10 +69,17 @@ books (cumd expects the number first); they now are.
 1. List each volume in `library.toml` (most books already are, with their minei.ru source).
 2. Produce web-ready PDFs on the server, once:
    ```bash
-   sudo apt install djvulibre-bin qpdf
+   sudo apt install djvulibre-bin ghostscript qpdf
    python scripts/prepare_pdf.py --out /var/www/ponomar/maktabah/pdf
    python scripts/prepare_pdf.py --out /var/www/ponomar/maktabah/pdf --check
+   python scripts/prepare_pdf.py --out /var/www/ponomar/maktabah/pdf --input Tipikon.djvu
    ```
+   `--input` converts local DJVU or PDF files instead of downloading the sources; each is
+   written to `--out` under its own name with a `.pdf` extension.
+   Page images are downsampled to JPEG at `--dpi` (default 150; `--dpi 0` skips this),
+   since a converted DJVU is otherwise often 30–40 times its original size.
+   `--jpeg-q` sets the JPEG strength (default 0.9; higher is smaller) and `--gray`
+   drops colour.
    The PDFs are *linearized*: with the web server’s normal range-request support, pdf.js
    fetches only the pages being looked at, so a 900-page Triodion opens at page 600 at once.
 3. Set each volume’s `offset` (PDF page index − printed page number). Open any section,
