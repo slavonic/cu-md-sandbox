@@ -9,12 +9,12 @@ Part 1 covers September–February and part 2 covers March–August. The scans a
 
 ## Status of the text
 
-- `chapters/09_10.md` (10 September, All Saints of Lipetsk) was typeset by Ponomar Technologies, Inc.
-  and is proofread. It has no page tags.
-- **Every other chapter is OCR output that has not been proofread.** The model was fine-tuned
+- **All chapters are OCR output that has not been proofread.** The model was fine-tuned
   on lines from this repository. On 10 September, compared with the proofread text and checked
   against the page images, it made about 0.1 % character errors (about 35 in 37,000). Most of
   them are in diacritics and in letters next to large decorated initials.
+- `ocr/09_10.md.bak` (10 September, All Saints of Lipetsk) is an earlier file that was typeset by Ponomar Technologies, Inc.
+  and is partially proofread. It will be deleted after `chapters/09_10.md` is proofread.
 - `chapters/00_1.md` and `chapters/00_2.md` (title page and table of contents of each part) are
   given exactly as read, without any correction, and are of poor quality.
 
@@ -51,7 +51,8 @@ were split at page boundaries:
 
 The markup follows the rest of the repository (see `../markup-tags.md`):
 - Paragraphs are separated by a blank line.
-- Red text is `*…*` and a red initial is `~`.
+- Red text is `=…=` and a red initial is `~`. (The OCR wrote `*…*`; this was replaced with `=`
+  everywhere.)
 - «꙳» stands where it is printed.
 - Running heads, page numbers and catchwords are removed, and hyphenated words are joined.
 
