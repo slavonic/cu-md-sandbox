@@ -290,13 +290,13 @@ title_en = "Supplementary Menaion"
 file = "MineyaDopolnitelnaya2018-1.pdf"
 label_en = "Part 1 (September–February)"
 label_ru = "Часть 1 (сентябрь–февраль)"
-offset = 3
+offset = 0  # the <<…: N>> tags give the PDF page itself
 [[books.MineyaDopolnitelnaya2018.pdf]]
 file = "MineyaDopolnitelnaya2018-2.pdf"
 label_en = "Part 2 (March–August)"
 label_ru = "Часть 2 (март–август)"
-from_chapter = "03_10"
-offset = 3
+from_chapter = "00_2"
+offset = 0
 
 [books.Sluzhebnik1906]
 category = "priest"

@@ -8,7 +8,7 @@ bilingual (English / Russian), mobile-friendly website. They replace `bookbuild.
 scripts/
   build_library.py   build the whole site (or some books)
   cumd_web.py        Markdown → HTML: the cumd rules + page links, notes, images
-  library.toml       catalogue: English titles, front-page sections, PDF scans
+  library.toml       catalog: English titles, front-page sections, PDF scans
   i18n.py            interface strings in English and Russian
   prepare_pdf.py     download DJVU/PDF scans, convert, linearize for the web
   templates/         Jinja2 page templates
@@ -79,7 +79,7 @@ books (cumd expects the number first); they now are.
    Page images are downsampled to JPEG at `--dpi` (default 150; `--dpi 0` skips this),
    since a converted DJVU is otherwise often 30–40 times its original size.
    `--jpeg-q` sets the JPEG strength (default 0.9; higher is smaller) and `--gray`
-   drops colour.
+   drops color.
    The PDFs are *linearized*: with the web server’s normal range-request support, pdf.js
    fetches only the pages being looked at, so a 900-page Triodion opens at page 600 at once.
 3. Set each volume’s `offset` (PDF page index − printed page number). Open any section,
